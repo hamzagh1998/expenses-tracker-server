@@ -1,0 +1,17 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "ET server side",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "server",
+    "Rest",
+    "API",
+    "Node.js/Express.js"
+  ],
+  "author": "Hamza Ghenimi",
+  "license": "ISC"
+}
