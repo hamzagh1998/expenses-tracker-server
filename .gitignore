@@ -3,7 +3,8 @@ node_modules
 package-lock.json
 *.log
 *.gz
-
+#firebase secret key
+service-account-key.json
 # Coveralls
 .nyc_output
 coverage
