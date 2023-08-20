@@ -1,13 +1,14 @@
 import mongoose, { Document, Schema } from "mongoose";
 
-interface IUser extends Document {
+export interface IUser extends Document {
   firstName: string;
   lastName: string;
   avatar: string;
   email: string;
-  initialSavingAmount: number;
-  completed: boolean;
-  donated: boolean;
+  password: string;
+  initialSavingAmount?: number;
+  completed?: boolean;
+  donated?: boolean;
 }
 
 const UserSchema: Schema<IUser> = new Schema(
@@ -29,9 +30,14 @@ const UserSchema: Schema<IUser> = new Schema(
       required: true,
       unique: true,
     },
+    password: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     initialSavingAmount: {
       type: Number,
-      required: true,
+      required: false,
     },
     completed: {
       type: Boolean,
