@@ -1,28 +1,23 @@
 import { createUser, findUser } from "../../repositories/user.queries";
 
+import { LoginService } from "./login.service";
+
 import { logger } from "../../logger/logger";
 import { tokenGenerator } from "../../utils/token-generator";
 import { passwordHasher } from "../../utils/password-hasher";
 
+import { AuthServicesResponsesI, PayloadI } from "./interfaces";
 
-type Provider = "email" | "google";
 
-interface PayloadI {
-  firstName: string;
-  lastName: string;
-  email: string;
-  photoURL?: string;
-  password?: string;
-  provider: Provider
-};
-
-export async function registerService(payload: PayloadI) {
+export async function registerService(payload: PayloadI): Promise<AuthServicesResponsesI> {
   const { firstName, lastName, email, photoURL, provider } = payload;  
 
   const [error, data] = await findUser({ email });
   if (error) {
     logger.error(`Error occur while try to find user with this email: ${email}\n Error trace: ${error}`);
     return {error: true, status: 500, detail: "Internal server error!"};
+  }  else if (data && provider === "google") {
+    return await LoginService(payload);
   } else if (data) {
     logger.warn(`Failed to create new account, user with this email: "${email}" already exists`)
     return {error: true, status: 409, detail: "Account with this email already exists!"}; // conflict

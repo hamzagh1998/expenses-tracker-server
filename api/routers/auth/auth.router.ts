@@ -6,4 +6,4 @@ import { AuthController } from "./auth.controller";
 export const authRouter = Router();
 
 authRouter.post("/register", AuthController.register);
-authRouter.post("/login", AuthController.register);
+authRouter.post("/login", AuthController.login);

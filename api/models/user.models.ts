@@ -8,7 +8,7 @@ export interface IUser extends Document {
   password?: string;
   initialSavingAmount?: number;
   completed?: boolean;
-  donated?: boolean;
+  premium?: boolean;
 }
 
 const UserSchema: Schema<IUser> = new Schema(
@@ -42,7 +42,7 @@ const UserSchema: Schema<IUser> = new Schema(
       type: Boolean,
       default: false,
     },
-    donated: {
+    premium: {
       type: Boolean,
       default: false,
     },

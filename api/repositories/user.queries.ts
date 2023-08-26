@@ -10,5 +10,5 @@ export async function createUser(payload: object) {
 };
 
 export async function findUser(filter: object) {
-  return await tryToCatch((filter: any) => User.findOne(filter), filter);
+  return await tryToCatch((filter: any) => User.findOne(filter).lean(), filter);
 };
