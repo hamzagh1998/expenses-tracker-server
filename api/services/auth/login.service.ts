@@ -4,12 +4,12 @@ import { findUser } from "../../repositories/user.queries";
 
 import { passwordVerifier } from "../../utils/password-verifier";
 import { tokenGenerator } from "../../utils/token-generator";
-import { AuthServicesResponsesI, PayloadI } from "./interfaces";
+import { AuthServicesResponsesI, AuthPayloadI } from "./interfaces";
 
 import { registerService } from "./register.service";
 
 
-export async function LoginService(payload: PayloadI): Promise<AuthServicesResponsesI> {
+export async function LoginService(payload: AuthPayloadI): Promise<AuthServicesResponsesI> {
   const { email, provider } = payload;
 
   const [error, data] = await findUser({ email });

@@ -6,10 +6,10 @@ import { logger } from "../../logger/logger";
 import { tokenGenerator } from "../../utils/token-generator";
 import { passwordHasher } from "../../utils/password-hasher";
 
-import { AuthServicesResponsesI, PayloadI } from "./interfaces";
+import { AuthServicesResponsesI, AuthPayloadI } from "./interfaces";
 
 
-export async function registerService(payload: PayloadI): Promise<AuthServicesResponsesI> {
+export async function registerService(payload: AuthPayloadI): Promise<AuthServicesResponsesI> {
   const { firstName, lastName, email, photoURL, provider } = payload;  
 
   const [error, data] = await findUser({ email });
@@ -19,7 +19,7 @@ export async function registerService(payload: PayloadI): Promise<AuthServicesRe
   }  else if (data && provider === "google") {
     return await LoginService(payload);
   } else if (data) {
-    logger.warn(`Failed to create new account, user with this email: "${email}" already exists`)
+    logger.warn(`Failed to create new account, user with this email: "${email}" already exists`);
     return {error: true, status: 409, detail: "Account with this email already exists!"}; // conflict
   };
 
