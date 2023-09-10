@@ -1,5 +1,6 @@
 import jwt  from "jsonwebtoken";
 
 export function tokenGenerator(payload: object) {
-  return jwt.sign(payload , process.env.SECRET_KEY!);
+  const plainObject = JSON.parse(JSON.stringify(payload));
+  return jwt.sign(plainObject, process.env.SECRET_KEY!);
 };
